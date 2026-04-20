@@ -2,26 +2,368 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Design Tokens ────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand */
+  --color-terracotta:    #ce6355;
+  --color-coral:         #eb9084;
+
+  /* Light Surfaces */
+  --color-bg:            #f5f4ed;
+  --color-ivory:         #faf9f5;
+  --color-white:         #ffffff;
+  --color-warm-sand:     #e8e6dc;
+
+  /* Dark Surfaces */
+  --color-dark-surface:  #30302e;
+  --color-near-black:    #141413;
+
+  /* Text */
+  --color-text-primary:  #141413;
+  --color-charcoal-warm: #4d4c48;
+  --color-olive-gray:    #5e5d59;
+  --color-stone-gray:    #87867f;
+  --color-dark-warm:     #3d3d3a;
+  --color-warm-silver:   #b0aea5;
+
+  /* Borders */
+  --color-border-cream:  #f0eee6;
+  --color-border-warm:   #e8e6dc;
+  --color-border-dark:   #30302e;
+  --color-ring-warm:     #d1cfc5;
+  --color-ring-deep:     #c2c0b6;
+
+  /* Semantic */
+  --color-error:         #b53333;
+  --color-focus:         #3898ec;
+
+  /* Typography */
+  --font-serif: 'Cormorant', Georgia, serif;
+  --font-sans:  'IBM Plex Sans', Arial, sans-serif;
+  --font-mono:  'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Radius scale */
+  --radius-xs:  4px;
+  --radius-sm:  6px;
+  --radius-md:  8px;
+  --radius-lg:  12px;
+  --radius-xl:  16px;
+  --radius-2xl: 24px;
+  --radius-3xl: 32px;
+
+  /* Shadow system — ring-based, warm-toned */
+  --shadow-ring:    0px 0px 0px 1px var(--color-border-cream);
+  --shadow-ring-sm: 0px 0px 0px 1px var(--color-ring-warm);
+  --shadow-ring-md: 0px 0px 0px 1px var(--color-ring-deep);
+  --shadow-whisper: rgba(0,0,0,0.05) 0px 4px 24px;
+  --shadow-card:    0px 0px 0px 1px var(--color-border-cream), rgba(0,0,0,0.04) 0px 2px 8px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* ─── Base ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* NOTE: Smooth scroll is handled in JS (lib/utils.ts#scrollToSection) so
+   we can customize duration and easing. CSS scroll-behavior would fight
+   our rAF loop on programmatic scrolls. */
+html { scroll-behavior: auto; }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* Lock scroll when modal is open */
+body.modal-open { overflow: hidden; }
+
+/* ─── Typography utilities ─────────────────────────────────── */
+.heading-display {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 5.5vw, 4.25rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--color-text-primary);
+}
+
+.heading-section {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3.8vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+}
+
+.heading-sub {
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 2.5vw, 2rem);
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--color-text-primary);
+}
+
+.heading-feature {
+  font-family: var(--font-sans);
+  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--color-text-primary);
+}
+
+.body-large {
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--color-olive-gray);
+}
+
+.body-serif {
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.label-overline {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;        /* mono already has wide natural tracking */
+  text-transform: uppercase;
+  color: var(--color-stone-gray);
+}
+
+/* ─── Focus ring ───────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ─── Scrollbar ────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-warm);
+  border-radius: 3px;
+}
+
+/* ─── Reveal animation (scroll-driven) ────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Layout ───────────────────────────────────────────────── */
+.container-wide {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .container-wide {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
   }
+}
+
+/* Card tray left padding — mirrors container-wide's left edge so cards
+   align flush with the "Accessibility" label at all viewport widths. */
+.card-tray-pl {
+  padding-left: 1.5rem;
+}
+@media (min-width: 768px) {
+  .card-tray-pl {
+    padding-left: 2.5rem;
+  }
+}
+@media (min-width: 1200px) {
+  .card-tray-pl {
+    padding-left: calc((100vw - 1200px) / 2 + 2.5rem);
+  }
+}
+
+/* Generous margins at large breakpoints — applied to content
+   sections that benefit from inward breathing room. Selected
+   Work is excluded because it's already max-width constrained. */
+@media (min-width: 1024px) {
+  .container-wide-padded {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+}
+@media (min-width: 1280px) {
+  .container-wide-padded {
+    padding-left: 7rem;
+    padding-right: 7rem;
+  }
+}
+
+/* Modal sizing container — initial values overridden by JS scroll
+   handler via direct style property mutation (no React re-renders). */
+.modal-size-wrapper {
+  width: min(760px, 92vw);
+  max-height: 88vh;
+  border-radius: 20px;
+}
+
+/* ─── Dark Mode Tokens ────────────────────────────────────────── */
+html.dark {
+  /* Surfaces — light parchment tones flip to dark warm tones */
+  --color-bg:          #1a1918;
+  --color-ivory:       #252422;
+  --color-warm-sand:   #2e2d2b;
+  --color-white:       #2a2927;
+
+  /* Text — dark values flip to light equivalents */
+  --color-text-primary:  #f0ede4;
+  --color-charcoal-warm: #c8c5bc;
+  --color-olive-gray:    #9e9c94;
+  --color-stone-gray:    #706e68;
+  --color-dark-warm:     #c8c5bc;
+  /* warm-silver stays — it's already used on near-black surfaces that don't change */
+
+  /* Borders */
+  --color-border-cream: #2c2b29;
+  --color-border-warm:  #363532;
+  --color-ring-warm:    #3c3a38;
+  --color-ring-deep:    #464440;
+
+  /* Shadow system — use CSS vars so shadows darken automatically */
+  --shadow-ring:    0px 0px 0px 1px var(--color-border-cream);
+  --shadow-ring-sm: 0px 0px 0px 1px var(--color-ring-warm);
+  --shadow-ring-md: 0px 0px 0px 1px var(--color-ring-deep);
+  --shadow-whisper: rgba(0,0,0,0.16) 0px 4px 24px;
+  --shadow-card:    0px 0px 0px 1px var(--color-border-cream), rgba(0,0,0,0.18) 0px 2px 8px;
+}
+
+/* ─── High Contrast (light) ──────────────────────────────────── */
+html.high-contrast {
+  --color-bg:            #ffffff;
+  --color-ivory:         #ffffff;
+  --color-text-primary:  #000000;
+  --color-charcoal-warm: #000000;
+  --color-olive-gray:    #1a1a18;
+  --color-stone-gray:    #333330;
+  --color-border-warm:   #141413;
+  --color-border-cream:  #141413;
+}
+
+/* ─── High Contrast (dark) ───────────────────────────────────── */
+html.dark.high-contrast {
+  --color-bg:            #000000;
+  --color-ivory:         #0d0c0b;
+  --color-text-primary:  #ffffff;
+  --color-charcoal-warm: #f0ede4;
+  --color-olive-gray:    #f0ede4;
+  --color-stone-gray:    #d0cec6;
+  --color-border-warm:   #ffffff;
+  --color-border-cream:  #888680;
+}
+
+/* ─── Reduce Motion ──────────────────────────────────────────── */
+html.reduce-motion *,
+html.reduce-motion *::before,
+html.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* ─── Dark Mode — Tailwind class overrides ───────────────────── */
+/*
+   Tailwind color utilities resolve to hex at build time. For tokens
+   that need to flip in dark mode we override here rather than
+   editing every component individually.
+*/
+
+/* Backgrounds */
+html.dark .bg-ivory       { background-color: var(--color-ivory) !important; }
+html.dark .bg-warm-sand   { background-color: var(--color-warm-sand) !important; }
+html.dark .bg-border-warm { background-color: var(--color-border-warm) !important; }
+/* Inputs and pure-white surfaces flip to a dark surface in dark mode */
+html.dark .bg-white       { background-color: var(--color-ivory) !important; }
+
+/* Text */
+html.dark .text-near-black    { color: var(--color-text-primary) !important; }
+html.dark .text-charcoal-warm { color: var(--color-charcoal-warm) !important; }
+html.dark .text-olive-gray    { color: var(--color-olive-gray) !important; }
+html.dark .text-stone-gray    { color: var(--color-stone-gray) !important; }
+html.dark .text-dark-warm     { color: var(--color-dark-warm) !important; }
+
+/* Hover variants */
+html.dark .hover\:text-near-black:hover { color: var(--color-text-primary) !important; }
+html.dark .hover\:bg-near-black:hover   { background-color: rgba(240,237,228,0.1) !important; }
+
+/* Borders */
+html.dark .border-near-black     { border-color: rgba(240,237,228,0.2) !important; }
+html.dark .border-border-warm    { border-color: var(--color-border-warm) !important; }
+html.dark .border-border-cream   { border-color: var(--color-border-cream) !important; }
+/* border-near-black/10 — the opacity-modifier variant used for section dividers.
+   On dark backgrounds the original 10% near-black is invisible; flip to 10% warm-white. */
+html.dark .border-near-black\/10 { border-color: rgba(240,237,228,0.12) !important; }
+html.dark .border-near-black\/8  { border-color: rgba(240,237,228,0.08) !important; }
+
+/* Shadows — use updated CSS vars */
+html.dark .shadow-ring      { box-shadow: var(--shadow-ring) !important; }
+html.dark .shadow-ring-warm { box-shadow: var(--shadow-ring-sm) !important; }
+html.dark .shadow-card      { box-shadow: var(--shadow-card) !important; }
+
+/* ─── Accessibility slider styling ───────────────────────────── */
+.a11y-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  touch-action: none; /* prevent page scroll while dragging on mobile */
+  background: linear-gradient(
+    to right,
+    var(--color-terracotta) 0%,
+    var(--color-terracotta) calc((var(--slider-pct, 0)) * 100%),
+    var(--color-border-warm) calc((var(--slider-pct, 0)) * 100%),
+    var(--color-border-warm) 100%
+  );
+}
+.a11y-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-ivory);
+  border: 2px solid var(--color-terracotta);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  cursor: grab;
+}
+.a11y-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-ivory);
+  border: 2px solid var(--color-terracotta);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  cursor: grab;
+}
+.a11y-slider:active::-webkit-slider-thumb { cursor: grabbing; }
+.a11y-slider:active::-moz-range-thumb     { cursor: grabbing; }
+.a11y-slider:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
