@@ -34,10 +34,9 @@ export function PasswordGate({ onUnlock, prefillPassword }: PasswordGateProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Focus input on mount (unless auto-attempting)
-  useEffect(() => {
-    if (!prefillPassword) inputRef.current?.focus();
-  }, [prefillPassword]);
+  // Intentionally no auto-focus on mount: on iOS, focusing an input
+  // programmatically triggers the keyboard and the autofill accessory bar
+  // even before the user intends to type. Users tap to focus when ready.
 
   function attemptUnlock(pw: string) {
     if (pw.trim().toLowerCase() === CASE_STUDY_PASSWORD) {
@@ -117,7 +116,7 @@ export function PasswordGate({ onUnlock, prefillPassword }: PasswordGateProps) {
           placeholder="Password"
           autoComplete="off"
           className={[
-            "w-full px-4 py-2.5 rounded-lg font-sans text-[14px] text-near-black",
+            "w-full px-4 py-2.5 rounded-lg font-sans text-[16px] text-near-black",
             "bg-white border transition-colors duration-150 outline-none",
             "placeholder:text-stone-gray",
             error

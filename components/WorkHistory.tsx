@@ -13,7 +13,7 @@ export function WorkHistory() {
   };
 
   return (
-    <section id="experience" className="relative w-full py-24 md:py-32 bg-bg border-b border-near-black/10 overflow-hidden">
+    <section id="experience" className="relative w-full pt-24 pb-48 md:pt-32 md:pb-52 bg-bg border-b border-near-black/10 overflow-hidden">
       <div className="container-wide container-wide-padded">
         {/* Header */}
         <motion.div

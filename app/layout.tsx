@@ -39,6 +39,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* maximum-scale=1 prevents Safari from zooming on input focus or pinch-zooming
+            into bottom sheets. user-scalable=no is paired for older iOS versions. */}
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
         {/* Prevent flash of wrong color scheme — runs synchronously before paint */}
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />

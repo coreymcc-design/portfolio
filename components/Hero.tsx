@@ -29,7 +29,7 @@ export function Hero() {
           variants={container}
           initial="hidden"
           animate="show"
-          className="max-w-3xl py-24 md:py-32"
+          className="max-w-3xl pt-24 pb-48 md:pt-32 md:pb-52"
         >
           {/* Headline — weight comes from .heading-display (500, matches Cormorant spec) */}
           <motion.h1

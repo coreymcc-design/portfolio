@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { projects } from "@/data/projects";
 import { ProjectLogo } from "@/components/ProjectLogos";
@@ -12,6 +12,33 @@ interface SelectedWorkProps {
 // Aspect ratio from spec: 655.77 × 281.21 ≈ 2.332 : 1
 // Expressed as padding-top percentage: (281.21 / 655.77) * 100 ≈ 42.88%
 const VIDEO_ASPECT = "42.88%";
+
+// iOS Safari won't autoplay unless `muted` is set as a DOM property (not just
+// the React attribute) before play is attempted. We also call .play()
+// imperatively to trigger autoplay immediately after the element mounts.
+function VideoThumbnail({ src, poster, alt }: { src: string; poster: string; alt: string }) {
+  const ref = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    v.muted = true;
+    v.play().catch(() => {});
+  }, []);
+  return (
+    <video
+      ref={ref}
+      className="absolute inset-0 w-full h-full object-cover"
+      src={src}
+      poster={poster}
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      aria-label={alt}
+    />
+  );
+}
 
 function ProjectCard({
   project,
@@ -55,16 +82,10 @@ function ProjectCard({
                 alt={`${project.title} preview`}
               />
             ) : (
-              <video
-                className="absolute inset-0 w-full h-full object-cover"
+              <VideoThumbnail
                 src={project.thumbnail}
                 poster={project.poster}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                aria-label={`${project.title} preview`}
+                alt={`${project.title} preview`}
               />
             )
           ) : (
