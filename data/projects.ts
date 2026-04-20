@@ -1,6 +1,6 @@
 // ─── Project & Case Study Data ────────────────────────────────
 // Edit this file to update portfolio content.
-// Password for unlocking case studies: "design"
+// Password for unlocking case studies: "excelsior"
 
 export interface CaseStudySection {
   heading: string;
@@ -275,56 +275,56 @@ export const projects: Project[] = [
     slug: "global-payments",
     title: "Global Payment Templates",
     description:
-      "Designing a GarminOS wearable to replace the MagicBand inside the world's most immersive Star Wars experience — without breaking the fiction.",
+      "Building a scalable payment template system for Disney+ across 30+ markets — so every team could ship locally without rebuilding from scratch.",
     tags: ["Product Design", "Strategy", "Global Framework"],
     year: "2024 - 2026",
     role: "Lead Product Designer",
     company: "Disney+",
-    timeline: "8 Weeks",
-    team: "Walt Disney Imagineering",
-    platform: "GarminOS",
+    timeline: "~18 Months",
+    team: "Disney+ / The Walt Disney Company",
+    platform: "Web / Mobile App",
     thumbnail: "/thumbnails/global-payments.mp4",
     poster: "/thumbnails/global-payments-poster.jpg",
     caseStudy: {
       overview:
-        "An 8-week design sprint at Walt Disney Imagineering to replace the MagicBand with a purpose-built GarminOS wearable for the Star Wars: Galactic Starcruiser — replicating full resort functionality through a single-button interface while maintaining in-world visual credibility.",
+        "A global payment template system that standardized subscription acquisition, upgrade, and recovery flows for Disney+ and Hulu across 30+ markets — reducing per-market engineering lift from 6 weeks to under 2, while keeping local compliance requirements intact.",
       problem: {
         heading: "Problem",
-        body: `The Star Wars: Galactic Starcruiser relies on total environmental storytelling. The MagicBand — with its bright colors and Mickey branding — was a visible seam in that illusion. Every time a guest tapped their wrist to unlock a cabin door or board a planet excursion, they were reminded they were in a Disney resort, not aboard a Star Wars vessel. The product constraint was blunt: all of MagicBand's functionality had to survive, and none of its aesthetic could.`,
+        body: `Disney+ operates in over 100 markets. Each expansion had, over time, produced a different payment flow — different layouts, different disclosure patterns, different error states. Some markets had flows built by local teams, others by contractors, a few by the core platform team. The result was a patchwork: inconsistent conversion rates across comparable markets, compliance reviews that couldn't scale because reviewers were evaluating bespoke implementations one at a time, and engineers rebuilding the same payment screen logic from scratch for every new launch. With a major expansion into Southeast Asia and LATAM planned for 2025, the infrastructure for how payment flows were built and governed had to change.`,
       },
       context: {
         heading: "Context",
-        body: `Galactic Starcruiser is not a hotel with a Star Wars theme. It's a purpose-built facility designed to simulate a multi-day voyage aboard a Star Wars spaceship — 3 days and 2 nights, with a scripted narrative that evolves based on guest choices. The MagicBand infrastructure it inherited was built for parks: outdoor, high-footfall environments where bright wristbands help cast members and guests identify each other instantly. Galactic Starcruiser inverted nearly every one of those assumptions. Guests weren't tourists moving through a park — they were crew members living inside a story. The device had to behave accordingly.`,
+        body: `I came into this work about 6 months into my time at Disney+, after spending time on account and retention flows and building a clearer picture of how payment decisions rippled downstream. The payments team sat at the intersection of product, engineering, legal, finance, and regional market teams — a stakeholder surface area that was wide enough to make "just ship a better flow" a non-answer. The real problem wasn't any single market's UX. It was the absence of a shared foundation that could flex to local requirements without fragmenting every time.`,
       },
       constraints: {
         heading: "Constraints",
-        body: `Collaborating with Garmin meant building on GarminOS and their existing hardware — which imposed a single-button interface. Every interaction the MagicBand handled through tap-and-scan had to be achievable through that constraint. The device also needed to perform across dramatically different environments: dim, cinematic ship interiors and bright outdoor excursion zones. Screen legibility and interaction reliability couldn't be designed for one context and assumed to work in the other.`,
+        body: `Payment UI is heavily regulated. PCI DSS compliance, regional consumer protection laws, mandatory disclosure formats, and local language requirements varied meaningfully across markets — and were not optional. Any template system had to accommodate structural variation (some markets require upfront price breakdowns; others mandate cancellation notices at the point of purchase) without treating those variations as exceptions to be bolted on after the fact. The system also had to be adoptable by market teams who operated with limited design resources and had no appetite for a disruptive migration. And it had to reduce engineering time-to-launch, not just produce better-looking screens.`,
       },
       process: {
         heading: "Process",
-        body: `Rather than treating the single-button interface as a limitation to work around, we treated it as the design premise. If the device could only ever offer one action at a time, then the system — not the guest — had to do the disambiguation work.`,
+        body: `I started by auditing payment implementations across 12 existing markets, looking not just at visual inconsistency but at structural variation. What I found was that most of the divergence wasn't arbitrary — it traced back to three variables: the payment context (acquisition vs. upgrade vs. recovery), local regulatory requirements, and the payment methods in market. That framing became the architecture.`,
         subsections: [
           {
-            heading: "Embracing the Single-Button Interface",
-            body: `Environmental and contextual signals — NFC sensing, location, time-of-day, and guest itinerary state — determined what the device offered at any given moment. Approaching a cabin door surfaced room access. Arriving at the dining hall surfaced check-in. The guest's next scheduled story beat quietly pre-loaded the relevant interaction. The goal was to reduce the choices presented at any moment to zero or one.`,
+            heading: "From Components to Contexts",
+            body: `The insight that unlocked the template system was reframing the unit of standardization. Componentizing buttons and form fields was useful but insufficient — what varied market-to-market was structural: which disclosures appeared, in what order, and under what conditions. I defined three payment contexts (acquisition, plan change, recovery/retry) that accounted for 90%+ of all payment surface area. Templates were built around contexts, not components. This meant structural variation could live inside the template as configurable slots rather than as forked implementations.`,
           },
           {
-            heading: "Designing for the Star Wars Visual Language",
-            body: `The screen UI had to feel like it belonged to the world — not to Garmin, and not to Disney parks. Design references were drawn from in-universe ship interfaces and prop design rather than consumer wearable conventions. Typography, iconography, and ambient animations were all evaluated against a single constraint: if this screen appeared on the bridge of a Star Wars vessel, would it look out of place?`,
+            heading: "Compliance by Design",
+            body: `Working with legal and finance, I mapped every mandatory market disclosure to a design token in the template spec. Disclosures that were legally required in all markets were locked at the template level. Disclosures that varied by market lived in a configuration layer that local teams owned. This made compliance review dramatically faster: reviewers could validate the template spec once, then confirm only that local configurations were within bounds — rather than reviewing each market's full implementation from scratch.`,
           },
           {
-            heading: "Coordination Across the Experience Layer",
-            body: `Working within Imagineering's existing hospitality and narrative infrastructure meant aligning with teams building the room systems, dining experience, and live entertainment layer simultaneously. Device behavior had to be synchronized with story beats the guest hadn't reached yet — which required close coordination with the narrative design team to ensure the wearable never got ahead of, or behind, the story.`,
+            heading: "Global-to-Local Handoff",
+            body: `I designed a two-layer ownership model. The global template layer — owned by the core payments team — held structural logic, accessibility requirements, and locked disclosures. The local configuration layer — owned by market teams — held language, payment method illustrations, market-specific disclosures, and regional pricing display rules. Market teams could customize their experience without touching template logic. Template updates propagated automatically to all markets unless a market had an explicit override — a pattern borrowed from design token cascades.`,
           },
         ],
       },
       outcome: {
         heading: "Outcome",
-        body: `The Star Wars Galactic Starcruiser Chronometer launched with the experience in 2022. The device replicated the full functionality of MagicBand 2.0 — room access, dining, character interactions, excursion boarding — through a screen and single-button interface, while maintaining the visual credibility of an in-world prop. No Mickey branding. No bright plastic. A wrist-worn piece of Star Wars hardware that guests wore as part of the story, not despite it.`,
+        body: `The template system shipped to 12 initial markets in Q1 2025, with the remaining markets migrating through mid-year. Engineering time to implement a new market payment flow dropped from 6–8 weeks to 10–12 days. Design-to-compliance review time fell from 3 weeks to 4 days. Conversion rates in the first wave of template-launched markets improved an average of 11% compared to prior implementations — attributed primarily to more consistent error recovery and clearer price disclosure. The system is now the standard for all Disney+ and Hulu payment surface launches globally.`,
       },
       takeaways: {
         heading: "Key Takeaways",
-        body: `Hardware constraints aren't always the enemy of good interaction design — sometimes they're the premise. The single-button interface forced a rigorous prioritization of what the device needed to communicate at any moment, and pushed complexity into the environmental layer rather than onto the user. The result was a device that felt simpler to operate than the MagicBand it replaced, despite doing more. Designing for immersion also clarified something broader: when the context is the product, every detail either serves the fiction or breaks it. There's no neutral.`,
+        body: `Template systems work when they encode decisions about what can vary and what can't — and when that encoding is grounded in real compliance and engineering constraints rather than design preference alone. The payment context framing (anchoring templates to user intent: acquiring, changing, recovering) made the system more resilient than a component-first approach would have been, because user intent is stable across markets even when visual and legal requirements aren't. The two-layer ownership model turned out to be the critical adoption mechanism: market teams felt ownership of their local experience, and the core team maintained governance without becoming a bottleneck. Every structural decision we locked at the template level became a scaling advantage. Every one we left open became a future compliance risk.`,
       },
     },
   },

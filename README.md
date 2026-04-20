@@ -22,7 +22,7 @@ npm run dev
 The default password to unlock all case studies is:
 
 ```
-design
+excelsior
 ```
 
 Change it in `data/projects.ts` → `CASE_STUDY_PASSWORD`.
@@ -34,7 +34,7 @@ Change it in `data/projects.ts` → `CASE_STUDY_PASSWORD`.
 
 ### Deep-link with password pre-filled (auto-unlocks):
 ```
-/?project=payments-onboarding&password=design
+/?project=payments-onboarding&password=excelsior
 ```
 
 ---
@@ -103,9 +103,9 @@ Fonts are loaded via Google Fonts `@import` at the top of `globals.css`.
 Families used: Source Serif 4 (headings, weight 500), IBM Plex Sans (UI/body).
 
 ### Video Thumbnails
-Project cards show placeholder SVGs. Replace them by editing the thumbnail
-area in `components/SelectedWork.tsx`. The `thumbnail` field in each project
-in `data/projects.ts` stores the intended path — add your assets to `public/thumbnails/`.
+Project cards use looping MP4 videos with poster fallbacks, served from `public/thumbnails/`.
+The `thumbnail` and `poster` fields in each project in `data/projects.ts` point to the assets.
+Reduce-motion mode automatically shows the poster instead of the video.
 
 ### Easter Egg / Game
 The `#game-container` div inside `components/EasterEgg.tsx` is the mount point.
