@@ -275,8 +275,8 @@ export const projects: Project[] = [
     slug: "global-payments",
     title: "Global Payment Templates",
     description:
-      "Building a scalable payment template system for Disney+ across 30+ markets — so every team could ship locally without rebuilding from scratch.",
-    tags: ["Product Design", "Strategy", "Global Framework"],
+      "A framework for launching global payment methods faster, while keeping the experience consistent across regions.",
+    tags: ["Platform Design", "Systems Thinking", "0→1 & Scale", "Globalization", "Payments", "Cross-functional Leadership"],
     year: "2024 - 2026",
     role: "Lead Product Designer",
     company: "Disney+",
@@ -287,44 +287,58 @@ export const projects: Project[] = [
     poster: "/thumbnails/global-payments-poster.jpg",
     caseStudy: {
       overview:
-        "A global payment template system that standardized subscription acquisition, upgrade, and recovery flows for Disney+ and Hulu across 30+ markets — reducing per-market engineering lift from 6 weeks to under 2, while keeping local compliance requirements intact.",
+        "Launching new payment methods globally sounds straightforward until you actually try to do it. Each market has its own expectations, technical constraints, and legal requirements. Over time, this led to inconsistent experiences and one-off solutions that were hard to maintain and even harder to scale. I led the design of a framework to standardize how payment methods are implemented across Disney+. The goal was simple: make it easier to launch new methods without starting from scratch every time.",
       problem: {
         heading: "Problem",
-        body: `Disney+ operates in over 100 markets. Each expansion had, over time, produced a different payment flow — different layouts, different disclosure patterns, different error states. Some markets had flows built by local teams, others by contractors, a few by the core platform team. The result was a patchwork: inconsistent conversion rates across comparable markets, compliance reviews that couldn't scale because reviewers were evaluating bespoke implementations one at a time, and engineers rebuilding the same payment screen logic from scratch for every new launch. With a major expansion into Southeast Asia and LATAM planned for 2025, the infrastructure for how payment flows were built and governed had to change.`,
+        body: `How do we support a growing set of global payment methods, each with different requirements, without slowing teams down or creating inconsistent user experiences?`,
       },
       context: {
         heading: "Context",
-        body: `I came into this work about 6 months into my time at Disney+, after spending time on account and retention flows and building a clearer picture of how payment decisions rippled downstream. The payments team sat at the intersection of product, engineering, legal, finance, and regional market teams — a stakeholder surface area that was wide enough to make "just ship a better flow" a non-answer. The real problem wasn't any single market's UX. It was the absence of a shared foundation that could flex to local requirements without fragmenting every time.`,
+        body: `Disney+ operates in markets where preferred payment methods vary widely. Supporting those methods is directly tied to conversion and retention. On the backend, integrations with partners like Boku and Adyen were already underway. On the frontend, things were less consistent. Each new payment method required a custom approach, which meant longer timelines and more room for fragmentation. At the time, launching a new method could take anywhere from 8 to 12 weeks.`,
       },
       constraints: {
-        heading: "Constraints",
-        body: `Payment UI is heavily regulated. PCI DSS compliance, regional consumer protection laws, mandatory disclosure formats, and local language requirements varied meaningfully across markets — and were not optional. Any template system had to accommodate structural variation (some markets require upfront price breakdowns; others mandate cancellation notices at the point of purchase) without treating those variations as exceptions to be bolted on after the fact. The system also had to be adoptable by market teams who operated with limited design resources and had no appetite for a disruptive migration. And it had to reduce engineering time-to-launch, not just produce better-looking screens.`,
+        heading: "Solution",
+        body: `We created a flexible framework based on three core payment flow types. This gave teams a shared model to design and build against, while still allowing for regional differences.\n\nType A: fully on-platform (credit and debit cards)\nType B: redirect flows (PayPal)\nType C: asynchronous flows (Mercado Pago)\n\nInstead of designing each payment method from scratch, teams could map new methods to one of these patterns and adapt from there. It made the work faster, and the experience more consistent.`,
       },
       process: {
         heading: "Process",
-        body: `I started by auditing payment implementations across 12 existing markets, looking not just at visual inconsistency but at structural variation. What I found was that most of the divergence wasn't arbitrary — it traced back to three variables: the payment context (acquisition vs. upgrade vs. recovery), local regulatory requirements, and the payment methods in market. That framing became the architecture.`,
+        body: `The process was as much about alignment as it was about design. We worked across product, engineering, legal, and regional teams to build something everyone could actually use.`,
         subsections: [
           {
-            heading: "From Components to Contexts",
-            body: `The insight that unlocked the template system was reframing the unit of standardization. Componentizing buttons and form fields was useful but insufficient — what varied market-to-market was structural: which disclosures appeared, in what order, and under what conditions. I defined three payment contexts (acquisition, plan change, recovery/retry) that accounted for 90%+ of all payment surface area. Templates were built around contexts, not components. This meant structural variation could live inside the template as configurable slots rather than as forked implementations.`,
+            heading: "Looking for Patterns",
+            body: `We started by auditing existing and upcoming payment methods. The goal was to understand where things were consistent and where they weren't.`,
           },
           {
-            heading: "Compliance by Design",
-            body: `Working with legal and finance, I mapped every mandatory market disclosure to a design token in the template spec. Disclosures that were legally required in all markets were locked at the template level. Disclosures that varied by market lived in a configuration layer that local teams owned. This made compliance review dramatically faster: reviewers could validate the template spec once, then confirm only that local configurations were within bounds — rather than reviewing each market's full implementation from scratch.`,
+            heading: "Defining the Framework",
+            body: `Working with a senior designer, I led the effort to define the three flow types. We focused on covering the majority of use cases without overcomplicating the system.`,
           },
           {
-            heading: "Global-to-Local Handoff",
-            body: `I designed a two-layer ownership model. The global template layer — owned by the core payments team — held structural logic, accessibility requirements, and locked disclosures. The local configuration layer — owned by market teams — held language, payment method illustrations, market-specific disclosures, and regional pricing display rules. Market teams could customize their experience without touching template logic. Template updates propagated automatically to all markets unless a market had an explicit override — a pattern borrowed from design token cascades.`,
+            heading: "Getting Alignment",
+            body: `A big part of the work was making sure product, engineering, and design were all aligned. The framework only works if everyone uses it.`,
+          },
+          {
+            heading: "Designing for Global Nuance",
+            body: `We accounted for regional differences like legal requirements and cultural expectations. The system needed to be consistent, but not rigid.`,
+          },
+          {
+            heading: "Building with Engineering",
+            body: `We partnered closely with engineering as they developed their own templates. This helped ensure what we designed could actually scale in implementation.`,
           },
         ],
       },
       outcome: {
-        heading: "Outcome",
-        body: `The template system shipped to 12 initial markets in Q1 2025, with the remaining markets migrating through mid-year. Engineering time to implement a new market payment flow dropped from 6–8 weeks to 10–12 days. Design-to-compliance review time fell from 3 weeks to 4 days. Conversion rates in the first wave of template-launched markets improved an average of 11% compared to prior implementations — attributed primarily to more consistent error recovery and clearer price disclosure. The system is now the standard for all Disney+ and Hulu payment surface launches globally.`,
+        heading: "Results",
+        body: `The framework reduced time to launch from 8–12 weeks to 4–6 weeks and enabled 12 payment methods to launch across 14 countries. Each new method contributed between $2M and $21M in annualized operating income. Experiences became more consistent across regions, and designers gained more time to focus on new problems instead of repeating the same work.`,
+        subsections: [
+          {
+            heading: "Next Steps",
+            body: `We're continuing to evolve the framework to handle more complex regional requirements, like tax information collection. We're also working with the design systems team to translate these patterns into more flexible Figma components using slots.`,
+          },
+        ],
       },
       takeaways: {
-        heading: "Key Takeaways",
-        body: `Template systems work when they encode decisions about what can vary and what can't — and when that encoding is grounded in real compliance and engineering constraints rather than design preference alone. The payment context framing (anchoring templates to user intent: acquiring, changing, recovering) made the system more resilient than a component-first approach would have been, because user intent is stable across markets even when visual and legal requirements aren't. The two-layer ownership model turned out to be the critical adoption mechanism: market teams felt ownership of their local experience, and the core team maintained governance without becoming a bottleneck. Every structural decision we locked at the template level became a scaling advantage. Every one we left open became a future compliance risk.`,
+        heading: "Takeaways",
+        body: `Systems make it easier to move faster without losing consistency. A shared model is more valuable than a set of one-off solutions — and a lot of design problems are really alignment problems. Constraints aren't the blocker, they're the work. The goal isn't to remove complexity, it's to make it manageable.`,
       },
     },
   },
