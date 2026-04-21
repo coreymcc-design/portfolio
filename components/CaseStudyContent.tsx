@@ -9,7 +9,7 @@ interface CaseStudyContentProps {
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
     <h4
-      className="text-[11px] font-mono font-medium tracking-[0.07em] uppercase mb-3"
+      className="text-[11px] font-mono font-semibold tracking-[0.07em] uppercase mb-3"
       style={{ color: "var(--color-stone-gray)" }}
     >
       {children}
@@ -21,7 +21,7 @@ function Block({ heading, body }: { heading: string; body: string }) {
   return (
     <div className="mb-10">
       <SectionLabel>{heading}</SectionLabel>
-      <p className="body-serif" style={{ color: "var(--color-charcoal-warm)" }}>
+      <p className="body-large" style={{ color: "var(--color-charcoal-warm)" }}>
         {body}
       </p>
     </div>
@@ -126,7 +126,7 @@ export function CaseStudyContent({ project }: CaseStudyContentProps) {
 
           <h2
             className="heading-sub mb-4"
-            style={{ fontFamily: "var(--font-serif)" }}
+            style={{ fontFamily: "var(--font-serif)", fontWeight: 600 }}
           >
             {title}
           </h2>
@@ -200,7 +200,7 @@ export function CaseStudyContent({ project }: CaseStudyContentProps) {
         {/* ── Process ───────────────────────────────────────────── */}
         <div className="px-6 md:px-10 mb-4">
           <SectionLabel>{caseStudy.process.heading}</SectionLabel>
-          <p className="body-serif mb-8" style={{ color: "var(--color-charcoal-warm)" }}>
+          <p className="body-large mb-8" style={{ color: "var(--color-charcoal-warm)" }}>
             {caseStudy.process.body}
           </p>
 
@@ -211,7 +211,7 @@ export function CaseStudyContent({ project }: CaseStudyContentProps) {
                 style={{ borderColor: "var(--color-border-warm)" }}
               >
                 <h5
-                  className="text-[13px] font-sans font-medium mb-1.5"
+                  className="text-[13px] font-sans font-semibold mb-1.5"
                   style={{ color: "var(--color-dark-warm)" }}
                 >
                   {sub.heading}
@@ -270,8 +270,8 @@ export function CaseStudyContent({ project }: CaseStudyContentProps) {
           <div>
             <SectionLabel>{caseStudy.takeaways.heading}</SectionLabel>
             <p
-              className="text-[14px] leading-relaxed italic"
-              style={{ color: "var(--color-charcoal-warm)", fontFamily: "var(--font-serif)" }}
+              className="text-[14px] font-sans leading-relaxed italic"
+              style={{ color: "var(--color-charcoal-warm)" }}
             >
               {caseStudy.takeaways.body}
             </p>
