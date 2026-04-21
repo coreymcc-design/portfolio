@@ -156,10 +156,10 @@ export const projects: Project[] = [
 
   {
     slug: "hulu-account",
-    title: "Hulu Account Unification",
+    title: "Hulu Account Migration & Unification",
     description:
-      "Building the token layer and component library that unified four product teams shipping in parallel.",
-    tags: ["Design Systems", "Leadership", "Tokens"],
+      "A multi-year migration to unify Hulu's account and billing experience onto the Disney+ platform without losing subscribers.",
+    tags: ["Platform Design", "Systems Thinking", "Migration & Unification", "Payments", "0→1 & Scale", "Cross-functional Leadership"],
     year: "2022",
     role: "Design Systems Lead",
     company: "Figma",
@@ -170,44 +170,58 @@ export const projects: Project[] = [
     poster: "/thumbnails/hulu-account-poster.jpg",
     caseStudy: {
       overview:
-        "A foundational design system built from scratch to replace three divergent component libraries across four product teams, enabling consistent and accelerated shipping.",
+        "After the Disney acquisition, Hulu's account and billing systems remained largely untouched for a few years. When we finally started the migration to the Disney+ commerce platform, it wasn't just a redesign. It was a full unification effort across systems, subscription types, and millions of users with very different states. I led design across this initiative, working with product and engineering over a multi-year rollout to bring Hulu onto a shared platform while maintaining continuity for over 20 million subscribers.",
       problem: {
         heading: "Problem",
-        body: `After a series of acquisitions, the company was operating with three distinct Figma component libraries and four engineering codebases — none of which were compatible. Design debt was measured not in screens but in organizational friction: designers from different teams couldn't review each other's work without mental translation. Engineers were rebuilding the same button in four flavors.`,
+        body: `How do you migrate tens of millions of users, across a wide range of subscription types and edge cases, onto a new platform without disrupting their experience or risking churn?`,
       },
       context: {
         heading: "Context",
-        body: `I was brought in six months after the acquisitions to lead the unification effort. The business context was high-stakes: a major product launch was planned for Q2, and four teams needed to ship cohesively despite having never shipped together. I had one other designer and two front-end engineers to build the system.`,
+        body: `Hulu had years of legacy systems, plans, and partner integrations that didn't align with the Disney+ commerce stack. Users included direct subscribers, third-party bundles (Spotify, T-Mobile), in-app purchase subscribers (Apple, Google), and users on deprecated plans, payment methods, and promotions. At the same time, there was a clear directive from the business: no user left behind. The migration couldn't break existing experiences or cause subscriber loss. On the product side, this was also an opportunity. Moving to the Disney+ platform unlocked features like add-ons and free trials that hadn't previously existed in the same way.`,
       },
       constraints: {
-        heading: "Constraints",
-        body: `Teams couldn't pause feature work to migrate to a new system — adoption had to be gradual and backwards-compatible. The token system had to support three distinct brand expressions (the acquired products maintained separate brand identities at the surface layer). The system had to be maintained by a team of two, so every decision had to favor simplicity over completeness.`,
+        heading: "Solution",
+        body: `We unified Hulu's account and billing experience onto the Disney+ commerce platform, creating a single system that could support all subscription types while preserving existing user states. This included a full redesign of the account management experience, support for legacy plans, deprecated payment methods, and promotional states, clear handling of complex scenarios like grace periods, holds, and stacked subscriptions, and unified partner activation flows across third-party and direct subscriptions. The goal wasn't just consistency. It was continuity. Users should move to the new system without feeling like anything broke.`,
       },
       process: {
         heading: "Process",
-        body: `I started with a component audit — not to catalogue everything, but to identify the 20 components that touched 80% of user-facing surfaces. This became the Phase 1 scope. Everything else was explicitly deferred.`,
+        body: `The work was less like designing something new and more like remodeling an old house. Every time we opened something up, there were surprises.`,
         subsections: [
           {
-            heading: "Token Architecture",
-            body: `I designed a three-tier token system: global (raw values), semantic (role-based aliases), and component (scoped overrides). This allowed different brand expressions to share the same component logic while surfacing different visual personalities through the semantic layer.`,
+            heading: "Understanding What We Were Working With",
+            body: `We started with ongoing audits of the existing Hulu experience. A lot of institutional knowledge had been lost, so we often had to reverse engineer how things worked.`,
           },
           {
-            heading: "Adoption Strategy",
-            body: `Rather than a flag-day cutover, I introduced the system through one team's highest-visibility feature. The visible quality improvement created internal demand — within 8 weeks, all four teams had voluntarily requested onboarding. Pull beats push in systems adoption.`,
+            heading: "Mapping the Full System",
+            body: `We documented all subscription permutations across D2C, third-party, and in-app purchase users. This became the foundation for making sure nothing was missed.`,
           },
           {
-            heading: "Documentation as Product",
-            body: `I treated the documentation site as a first-class product, not an afterthought. Every component page included decision rationale, not just usage guidance. This reduced Slack questions by approximately 60% and helped new designers onboard faster.`,
+            heading: "Creating Structure Across Teams",
+            body: `I led design strategy and worked closely with product and engineering to define priorities, resourcing, and sequencing across the migration. We also ran a weekly UX working session for over a year and a half — the core space for design, product, and engineering to review work, align on decisions, and move forward together.`,
+          },
+          {
+            heading: "Designing for Edge Cases, Not Just the Happy Path",
+            body: `A large part of the work was handling scenarios like deprecated plans and payment methods, promotional states (student, military, etc.), and stacked subscriptions across different channels. The system needed to account for all of it without becoming overwhelming.`,
+          },
+          {
+            heading: "Phased Rollout",
+            body: `The migration was executed over multiple phases across more than two years, allowing us to test, learn, and reduce risk as we moved users onto the new platform.`,
           },
         ],
       },
       outcome: {
-        heading: "Outcome",
-        body: `The Q2 launch shipped on time with four teams producing visually unified work for the first time. Design-to-development handoff time decreased by an estimated 40%. The system became a hiring signal — multiple candidates cited it in interviews as a reason they applied.`,
+        heading: "Results",
+        body: `We migrated 20M+ subscribers to a unified platform while maintaining continuity under a strict "no user left behind" directive. Consolidating two separate commerce systems reduced operational overhead, and moving to the shared platform unlocked new capabilities like add-ons and free trials. Billing states and account scenarios became meaningfully clearer across the product.`,
+        subsections: [
+          {
+            heading: "Next Steps",
+            body: `Continue refining edge case handling as new subscription types are introduced, further align with the Disney+ design system for consistency across products, and build on the unified platform to support future growth and new features.`,
+          },
+        ],
       },
       takeaways: {
-        heading: "Key Takeaways",
-        body: `Design systems succeed when they're treated as products with users (your own designers and engineers) and when adoption is earned rather than mandated. The token architecture mattered less than the adoption strategy. A technically perfect system with poor adoption is worse than a simpler one that teams actually use.`,
+        heading: "Takeaways",
+        body: `Large migrations are as much about continuity as they are about improvement. Most of the complexity lives in edge cases, not primary flows. Shared systems reduce long-term cost, even if they increase short-term effort. Alignment across product, design, and engineering is what makes this work possible. Sometimes the job is less about designing something new and more about understanding what already exists.`,
       },
     },
   },
