@@ -40,10 +40,10 @@ export const CASE_STUDY_PASSWORD = "excelsior";
 export const projects: Project[] = [
   {
     slug: "axiom-interfaces",
-    title: "Axiom Crew Interfaces",
+    title: "Axiom Station Crew Interfaces",
     description:
-      "Reimagining complex operational oversight for a logistics platform serving 400+ dispatchers.",
-    tags: ["Product Design", "Data-dense UI", "Research"],
+      "Designing mission-critical interfaces for a next-generation space station, built for clarity in extreme conditions.",
+    tags: ["Systems Thinking", "Platform Design", "Design Systems", "Emerging Technology", "Accessibility", "Mission-Critical UX"],
     year: "2022 - 2023",
     role: "Associate Design Director",
     company: "Axiom Space",
@@ -54,44 +54,58 @@ export const projects: Project[] = [
     poster: "/thumbnails/axiom-home-poster.jpg",
     caseStudy: {
       overview:
-        "A ground-up redesign of a real-time logistics dashboard used daily by hundreds of dispatchers to manage fleets, exceptions, and SLA compliance across 12 time zones.",
+        "The next generation of space stations won't be operated the same way as the last. Axiom is building a commercial space station to eventually replace the International Space Station. As part of that effort, they partnered with NASA to align on technical and usability standards. I worked with Axiom to design a new system of crew interfaces that modernize how astronauts interact with onboard systems. The goal was to reduce cognitive load, improve clarity, and make these tools more accessible to a broader range of astronauts.",
       problem: {
         heading: "Problem",
-        body: `Dispatchers were spending an average of 23 minutes per shift just navigating between views to triage exceptions. The existing dashboard had been patched incrementally over five years — each addition made sense in isolation, but collectively it had become an information labyrinth. Critical alerts competed visually with routine status updates. Decision latency was costing the business roughly $180K per month in missed SLAs.`,
+        body: `How do you design interfaces for an environment you can't fully simulate, where usability directly impacts safety, and the underlying systems were designed over 30 years ago?`,
       },
       context: {
         heading: "Context",
-        body: `I joined mid-cycle as the third designer on a 14-person cross-functional team. Engineering had already committed to a React-based rewrite, which gave us an opportunity to rethink the information architecture rather than just reskin the surface. The platform was used exclusively on 27" monitors in a dispatch center environment — a rare luxury that allowed us to design with density in mind rather than defaulting to mobile-first thinking.`,
+        body: `Many of the systems on the ISS were built decades ago and reflect the constraints of that time. They're functional, but not always intuitive. At the same time, Axiom's long-term goal is to support a broader, more international group of astronauts — raising the bar for usability, accessibility, and clarity. Designing for this environment introduced a unique set of challenges: microgravity affects vision and fine motor control, the station is loud making communication more difficult, interfaces need to work reliably under mission-critical conditions, and the platform itself was evolving, shifting from tablet-native to a platform-agnostic web-based system. We had to design something modern, without losing the reliability of what came before.`,
       },
       constraints: {
-        heading: "Constraints",
-        body: `Training time for new dispatchers was capped at 2 hours, which meant any redesign had to feel learnable from day one. We also had a hard constraint against breaking existing keyboard shortcuts — power users had muscle memory built over years. Finally, the data model was being refactored in parallel, which meant some UI decisions had to be made against an API contract that was still in flux.`,
+        heading: "Solution",
+        body: `We developed a flexible, tablet-first design system and interface model built specifically for spaceflight conditions. The system prioritized high legibility across lighting conditions, large forgiving touch targets to account for movement and motor limitations, intentional use of color to communicate system status, and accessibility standards at AA and AAA levels to reduce the risk of user error. This system became the foundation for a suite of applications, including communications, inventory management, system monitoring, procedures, and experiment tracking. Everything was designed to be clear, consistent, and reliable under pressure.`,
       },
       process: {
         heading: "Process",
-        body: `I started with a five-day observation study in two dispatch centers, watching how operators actually moved through the interface under pressure. What I found contradicted some of our initial assumptions — dispatchers weren't struggling with information overload as much as they were struggling with information sequencing. The right data existed; it just wasn't surfaced at the right moment in the right workflow.`,
+        body: `The work required designing for conditions we couldn't fully experience, while a shifting technical platform meant some decisions had to be made and then remade.`,
         subsections: [
           {
-            heading: "Mapping the Decision Tree",
-            body: `I mapped every decision a dispatcher makes in a 4-hour shift against the current UI path required to support it. This produced a 47-step journey map that revealed 12 unnecessary context switches. The redesign consolidated three core workflows into a single adaptive view.`,
+            heading: "Starting Without a Clear Environment",
+            body: `One of the hardest parts was designing for conditions we couldn't fully experience. We relied heavily on research, astronaut input, and first principles to guide decisions. Early on, we were designing for a tablet-native experience. Midway through, the platform shifted to a web-based system running on a local server, which required rethinking how the system would scale across devices.`,
           },
           {
-            heading: "Progressive Disclosure Architecture",
-            body: `Instead of showing all exception types with equal visual weight, I designed a tiered alert system: critical SLA breaches surfaced prominently at the top; routine status updates were collapsed into a secondary panel accessible with a single keystroke. This alone reduced the visual noise dispatchers described as "the blur."`,
+            heading: "Defining the System",
+            body: `I co-led the design system effort, defining principles, accessibility standards, and interaction patterns. We used Material as a starting point, but quickly moved to a more bespoke system tailored to the environment. The system included tokens, components, and detailed usage guidelines, and was used across all applications.`,
           },
           {
-            heading: "Validation",
-            body: `We ran a two-week beta with eight dispatchers across two shifts. We measured time-to-triage, error rates on exception categorization, and — informally — stress signals from participant self-reporting. All three metrics improved meaningfully.`,
+            heading: "Designing for Extreme Constraints",
+            body: `We made deliberate choices based on the environment: increased spacing and padding for usability in motion, high contrast for changing lighting conditions, reduced reliance on fine motor precision, and clear system status indicators to support quick decision-making.`,
+          },
+          {
+            heading: "Working with Astronauts",
+            body: `We worked directly with Axiom astronauts, including Peggy Whitson, through interviews, whiteboarding sessions, and moderated usability testing. Their feedback shaped everything from interaction patterns to information hierarchy. As Michael López-Alegría put it, Axiom is "at an inflection point… allowing non-government astronauts to fly" — that shift made usability and accessibility even more critical.`,
+          },
+          {
+            heading: "Designing the Applications",
+            body: `I owned the end-to-end design for the communications and inventory management apps, including flows, states, and interaction patterns.`,
           },
         ],
       },
       outcome: {
-        heading: "Outcome",
-        body: `The redesigned dashboard shipped to all 400+ dispatchers over a 3-week rollout. Average time-to-triage dropped from 23 minutes to 8 minutes. SLA breach rate fell 34% in the first quarter post-launch. Two dispatchers submitted unsolicited testimonials saying it was "the first tool update in five years that actually made the job easier."`,
+        heading: "Results",
+        body: `We established a foundational design system for Axiom's future station interfaces and validated designs through direct astronaut testing and feedback. The work was deployed in early testing environments, including SpaceX partnership flights. Interaction patterns for legacy system behaviors were modernized, and qualitative feedback confirmed meaningful improvements to clarity and usability in mission-critical scenarios.`,
+        subsections: [
+          {
+            heading: "Next Steps",
+            body: `Continued testing in real and simulated spaceflight environments, expansion of the system across additional onboard applications, and further refinement based on astronaut feedback and mission learnings.`,
+          },
+        ],
       },
       takeaways: {
-        heading: "Key Takeaways",
-        body: `Dense information environments reward investment in information sequencing over visual simplification. The temptation in data-heavy interfaces is to add progressive disclosure too aggressively — hiding complexity rather than structuring it. The breakthrough here was understanding the workflow order, not just the data hierarchy. When you design for the decision, the interface organizes itself.`,
+        heading: "Takeaways",
+        body: `Designing for extreme environments forces clarity in every decision. Accessibility becomes critical when physical conditions change. You can't rely on intuition alone when you can't experience the environment. Systems thinking matters more when the stakes are high. Good design reduces cognitive load so people can focus on what actually matters.`,
       },
     },
   },
