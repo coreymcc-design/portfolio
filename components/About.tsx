@@ -67,7 +67,7 @@ export function About() {
         >
           A few things I believe{" "}
         </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-dark-surface">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-near-black">
           {principles.map((p, i) => (
             <motion.div
               key={p.number}
@@ -80,6 +80,7 @@ export function About() {
                 delay: i * 0.11,
               }}
               className="bg-near-black p-8 md:p-10"
+              style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
             >
               <span className="label-overline text-[#5e5d59] mb-4 block">
                 {p.number}
