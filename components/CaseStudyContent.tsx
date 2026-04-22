@@ -153,8 +153,7 @@ export function CaseStudyContent({ project }: CaseStudyContentProps) {
                 {label}
               </p>
               <p
-                className="text-[17px] font-sans leading-snug"
-                style={{ color: "var(--color-near-black)" }}
+                className="text-[17px] font-sans leading-snug text-near-black"
               >
                 {value}
               </p>
