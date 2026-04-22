@@ -242,10 +242,10 @@ export const projects: Project[] = [
 
   {
     slug: "gs-wearable",
-    title: "Galactic Starcruiser Wearable",
+    title: "Starcruiser Wearable Concept",
     description:
-      "Designing a GarminOS wearable to replace the MagicBand inside the world's most immersive Star Wars experience — without breaking the fiction.",
-    tags: ["Wearable UX", "GarminOS", "Walt Disney Imagineering"],
+      "A wearable concept designed to replace MagicBand with a fully in-universe Star Wars experience.",
+    tags: ["Experience Design", "Hardware + Software", "Concept Development", "Interaction Design", "Storytelling", "Emerging Technology"],
     year: "2022",
     role: "Design Lead",
     company: "WDI",
@@ -256,44 +256,48 @@ export const projects: Project[] = [
     poster: "/thumbnails/gswearable-home-poster.jpg",
     caseStudy: {
       overview:
-        "An 8-week design sprint at Walt Disney Imagineering to replace the MagicBand with a purpose-built GarminOS wearable for the Star Wars: Galactic Starcruiser — replicating full resort functionality through a single-button interface while maintaining in-world visual credibility.",
+        "The Star Wars: Galactic Starcruiser was designed to be a fully immersive, multi-day story. Every detail mattered. The problem was that guests were still going to be using MagicBands to unlock doors, make purchases, and navigate their experience. Functionally it worked. Visually, it broke the illusion. I explored a wearable concept that could replace MagicBand with something that felt native to the Star Wars universe, while still supporting all of the same functionality.",
       problem: {
         heading: "Problem",
-        body: `The Star Wars: Galactic Starcruiser relies on total environmental storytelling. The MagicBand — with its bright colors and Mickey branding — was a visible seam in that illusion. Every time a guest tapped their wrist to unlock a cabin door or board a planet excursion, they were reminded they were in a Disney resort, not aboard a Star Wars vessel. The product constraint was blunt: all of MagicBand's functionality had to survive, and none of its aesthetic could.`,
+        body: `How do you preserve the functionality of MagicBand while making it feel like it actually belongs inside the Star Wars universe?`,
       },
       context: {
         heading: "Context",
-        body: `Galactic Starcruiser is not a hotel with a Star Wars theme. It's a purpose-built facility designed to simulate a multi-day voyage aboard a Star Wars spaceship — 3 days and 2 nights, with a scripted narrative that evolves based on guest choices. The MagicBand infrastructure it inherited was built for parks: outdoor, high-footfall environments where bright wristbands help cast members and guests identify each other instantly. Galactic Starcruiser inverted nearly every one of those assumptions. Guests weren't tourists moving through a park — they were crew members living inside a story. The device had to behave accordingly.`,
+        body: `Galactic Starcruiser wasn't a typical theme park experience. Guests were part of a story that unfolded over multiple days, with scheduled moments, branching narratives, and live interactions. The wearable needed to support core functionality like room access, payments, and identity, help guide guests through the story without breaking immersion, align with the visual and experiential standards set by Lucasfilm, and work within real hardware constraints through a partnership with Garmin. There's also a less tangible constraint. The line between "this feels like Star Wars" and "this feels like cheap sci-fi" is thin, and mostly instinct.`,
       },
       constraints: {
-        heading: "Constraints",
-        body: `Collaborating with Garmin meant building on GarminOS and their existing hardware — which imposed a single-button interface. Every interaction the MagicBand handled through tap-and-scan had to be achievable through that constraint. The device also needed to perform across dramatically different environments: dim, cinematic ship interiors and bright outdoor excursion zones. Screen legibility and interaction reliability couldn't be designed for one context and assumed to work in the other.`,
+        heading: "Solution",
+        body: `I designed a wearable "chronometer" that blends into the Star Wars universe while extending the functionality of MagicBand through a simple, contextual interface. The device used a small screen paired with a single-button input, contextual interactions driven by itinerary and location, and visual design inspired by in-universe UI patterns rather than modern apps. Instead of navigating menus, guests interacted with the device based on what was happening around them. Unlocking a cabin door, making a purchase, or triggering a moment in the cantina all felt like part of the story, not a separate system layered on top of it.`,
       },
       process: {
         heading: "Process",
-        body: `Rather than treating the single-button interface as a limitation to work around, we treated it as the design premise. If the device could only ever offer one action at a time, then the system — not the guest — had to do the disambiguation work.`,
+        body: `The project required designing for a world first, and a product second — with real hardware constraints shaping every decision along the way.`,
         subsections: [
           {
-            heading: "Embracing the Single-Button Interface",
-            body: `Environmental and contextual signals — NFC sensing, location, time-of-day, and guest itinerary state — determined what the device offered at any given moment. Approaching a cabin door surfaced room access. Arriving at the dining hall surfaced check-in. The guest's next scheduled story beat quietly pre-loaded the relevant interaction. The goal was to reduce the choices presented at any moment to zero or one.`,
+            heading: "Designing for a World, Not Just a Product",
+            body: `This project started with understanding the role of the device in the broader experience. The goal wasn't just utility. It needed to feel like it belonged in the story.`,
           },
           {
-            heading: "Designing for the Star Wars Visual Language",
-            body: `The screen UI had to feel like it belonged to the world — not to Garmin, and not to Disney parks. Design references were drawn from in-universe ship interfaces and prop design rather than consumer wearable conventions. Typography, iconography, and ambient animations were all evaluated against a single constraint: if this screen appeared on the bridge of a Star Wars vessel, would it look out of place?`,
+            heading: "Working Within (and Around) Constraints",
+            body: `I partnered with Garmin to understand hardware and OS limitations. These constraints shaped everything from interaction patterns to visual design. At the same time, I worked closely with Walt Disney Imagineering and Lucasfilm creative leadership to make sure the experience felt authentic.`,
           },
           {
-            heading: "Coordination Across the Experience Layer",
-            body: `Working within Imagineering's existing hospitality and narrative infrastructure meant aligning with teams building the room systems, dining experience, and live entertainment layer simultaneously. Device behavior had to be synchronized with story beats the guest hadn't reached yet — which required close coordination with the narrative design team to ensure the wearable never got ahead of, or behind, the story.`,
+            heading: "Leaning Into a Simple Interaction Model",
+            body: `The single-button interface became a defining constraint. Instead of fighting it, I leaned into contextual interactions based on guest itinerary and location. The device surfaces the right action at the right time, rather than asking users to navigate.`,
+          },
+          {
+            heading: "Prototyping Both Function and Feel",
+            body: `I built a digital "works-like" prototype using real itinerary data, and a physical "feels-like" prototype with a simple spring-loaded button. This let us test both the interaction model and the physical experience of using the device.`,
           },
         ],
       },
       outcome: {
-        heading: "Outcome",
-        body: `The Star Wars Galactic Starcruiser Chronometer launched with the experience in 2022. The device replicated the full functionality of MagicBand 2.0 — room access, dining, character interactions, excursion boarding — through a screen and single-button interface, while maintaining the visual credibility of an in-world prop. No Mickey branding. No bright plastic. A wrist-worn piece of Star Wars hardware that guests wore as part of the story, not despite it.`,
+        heading: "Results",
+        body: `We developed a fully interactive prototype demonstrating core functionality and validated contextual interaction patterns for a narrative-driven experience. The concept aligned with internal and Lucasfilm creative expectations for in-universe design, and informed feasibility discussions around cost, scope, and experience impact. The concept was ultimately cut due to cost, alongside other ambitious ideas. In projects like this, that's part of the process.`,
       },
       takeaways: {
-        heading: "Key Takeaways",
-        body: `Hardware constraints aren't always the enemy of good interaction design — sometimes they're the premise. The single-button interface forced a rigorous prioritization of what the device needed to communicate at any moment, and pushed complexity into the environmental layer rather than onto the user. The result was a device that felt simpler to operate than the MagicBand it replaced, despite doing more. Designing for immersion also clarified something broader: when the context is the product, every detail either serves the fiction or breaks it. There's no neutral.`,
+        heading: "Takeaways",
+        body: `Designing for immersion means removing anything that feels "external." Constraints like a single-button interface can lead to better interaction models. Story can be a primary input to product design, not just a layer on top. Hardware and software need to be designed together to feel cohesive. Not every good idea ships, but it can still shape what does.`,
       },
     },
   },
