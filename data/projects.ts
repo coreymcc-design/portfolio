@@ -112,10 +112,10 @@ export const projects: Project[] = [
 
   {
     slug: "tmobile-app",
-    title: "T-Mobile Contextual Home",
+    title: "T-Mobile Contextual App Home",
     description:
-      "Reducing a 14-step fintech onboarding to 5 meaningful moments — without losing compliance.",
-    tags: ["Onboarding", "Fintech", "Conversion"],
+      "A personalized home experience that replaced generic upsells with relevant, context-driven actions.",
+    tags: ["Product Strategy", "Personalization", "Systems Thinking", "Platform Design", "Data-Informed Design", "Cross-functional Leadership"],
     year: "2021",
     role: "Product Designer",
     company: "Stripe",
@@ -126,44 +126,58 @@ export const projects: Project[] = [
     poster: "/thumbnails/tmo-home-poster.jpg",
     caseStudy: {
       overview:
-        "An end-to-end redesign of the merchant onboarding flow for a B2B payments platform, reducing drop-off by 41% and time-to-first-transaction by 3 days.",
+        "The T-Mobile app home was doing what many app homes do. It tried to sell. The problem was it wasn't very good at it. Users were seeing multiple offers they weren't eligible for, while struggling to find basic information about their account. I led the redesign of the home experience to make it more useful, more relevant, and ultimately more valuable to both users and the business.",
       problem: {
         heading: "Problem",
-        body: `The existing onboarding required merchants to complete 14 distinct screens before processing their first transaction. 62% dropped off at step 7 — always the same step: beneficial ownership disclosure. The compliance team insisted all information was legally required. The product team assumed the form was the problem. Both were wrong.`,
+        body: `How do you design a home experience that balances business goals with user needs, when the current experience is overloaded with irrelevant promotions?`,
       },
       context: {
         heading: "Context",
-        body: `The platform processed $2.4B in payments annually and was expanding aggressively into the SMB market. SMB merchants had very different mental models of "business verification" than enterprise accounts. They weren't familiar with KYB terminology, didn't have documents readily available, and experienced the process as interrogation rather than onboarding.`,
+        body: `The existing home screen was largely static and marketing-driven. Most users saw a mix of 5 to 7 upsell cards, many of which didn't apply to them. At the same time, T-Mobile's broader strategy was moving toward a unified "super app." The home screen needed to evolve into something more foundational — not just a place to promote offers, but a place users actually return to. Research and care center data made things clear: users primarily wanted to understand their account status, common actions included reviewing bills, making payments, and checking usage, and support calls were often driven by confusion around these basics. There was also real tension. Marketing drove the business, and reducing upsell surface area required strong alignment and clear rationale.`,
       },
       constraints: {
-        heading: "Constraints",
-        body: `Compliance requirements were non-negotiable — every field had a regulatory basis. The legal team had veto power over any language changes to form labels. The engineering team had a 6-week build window. And critically: we couldn't change what we collected, only how and when we asked for it.`,
+        heading: "Solution",
+        body: `We designed a dynamic home experience that prioritizes utility first, then layers in personalization and upsell. At the core is a system of contextual cards that adapt based on user data — billing cycle and payment status, plan and usage information, eligibility for upgrades or offers, and customer behavior and lifecycle. Instead of showing every possible offer, the experience surfaces clear account status and key actions upfront, alongside a smaller number of relevant, personalized opportunities. Before, users saw a feed of promotions. After, they see what matters to them, with the option to act.`,
       },
       process: {
         heading: "Process",
-        body: `I reframed the design problem: this wasn't a form redesign challenge. It was a mental model alignment challenge. Merchants weren't confused by the interface — they were confused by the conceptual model the interface was asking them to adopt.`,
+        body: `The work required grounding business goals in user reality, then building the alignment and systems needed to sustain the shift.`,
         subsections: [
           {
-            heading: "Resequencing by Mental Model",
-            body: `I reorganized the 14 steps not by data type (as the original was structured) but by the merchant's natural narrative: "Tell us about your business" → "Tell us about yourself" → "Tell us how you want to get paid." This required no changes to collected data — only the grouping and ordering changed.`,
+            heading: "Understanding What Users Actually Needed",
+            body: `We partnered with user research and care teams to analyze top call drivers and common behaviors. This grounded the work in real user needs, not assumptions.`,
           },
           {
-            heading: "Progressive Trust Building",
-            body: `I introduced a "save and return" pattern at every step, with a persistent progress indicator that showed merchants their current completion state even after returning days later. The insight: many drop-offs weren't abandonment — they were document-gathering pauses.`,
+            heading: "Defining Experience Principles",
+            body: `I established principles and guardrails to prevent the experience from slipping back into a marketing-heavy surface. This was critical for maintaining focus over time.`,
           },
           {
-            heading: "Plain Language Translation",
-            body: `Working within the legal team's constraints, I created a tooltip layer that translated regulatory terminology into plain English without modifying the field labels. "Beneficial owner" became "People who own 25%+ of your business" in the help text.`,
+            heading: "Balancing Business and User Needs",
+            body: `A large part of the work was aligning with stakeholders. Reducing upsell required demonstrating that relevance drives better outcomes than volume. User research helped validate that less noise improved perception and increased likelihood of engagement.`,
+          },
+          {
+            heading: "Designing a Flexible System",
+            body: `We created a component-based system of cards that could adapt to different user states. This included standardized upgrade and offer cards, a highly flexible billing card supporting 30+ states, and clear prioritization of information hierarchy.`,
+          },
+          {
+            heading: "Partnering on Personalization Logic",
+            body: `Working closely with product, I helped define how the experience responds to different inputs from the ML system. The goal was to ensure the output felt intentional, not random.`,
           },
         ],
       },
       outcome: {
-        heading: "Outcome",
-        body: `Drop-off at the beneficial ownership step fell from 62% to 19%. Overall onboarding completion rate improved from 38% to 67%. Average time-to-first-transaction decreased from 5.2 days to 2.1 days. The product team subsequently used this framework to redesign two other high-drop-off flows.`,
+        heading: "Results",
+        body: `The redesign increased engagement with the home experience and reduced calls to customer care related to account confusion. Surfaced content and actions became more relevant, and the work established a scalable foundation for T-Mobile's "super app" strategy.`,
+        subsections: [
+          {
+            heading: "Next Steps",
+            body: `Continue refining personalization as more behavioral data becomes available, expand the system across additional areas of the app, and further tune the balance between utility and promotion.`,
+          },
+        ],
       },
       takeaways: {
-        heading: "Key Takeaways",
-        body: `When you can't change what you collect, change the narrative frame around it. The most impactful design decisions in regulated products often happen at the information architecture level — not the visual layer. This project reinforced that form friction is rarely about the form itself; it's about the conceptual gap between the user's mental model and the system's model.`,
+        heading: "Takeaways",
+        body: `Relevance outperforms volume when it comes to upsell. A home screen should prioritize utility before promotion. Personalization needs structure to feel intentional. Many product problems are actually alignment problems. Good systems make it easier to maintain product quality over time.`,
       },
     },
   },
