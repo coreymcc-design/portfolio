@@ -388,4 +388,70 @@ export const projects: Project[] = [
       },
     },
   },
+
+  {
+    slug: "financial-wellness",
+    title: "Financial Wellness Concept",
+    description:
+      "A behavioral product concept designed to make credit card debt visible, approachable, and manageable.",
+    tags: ["0→1 Concept", "Behavioral Design", "Financial Wellness", "Research & Strategy", "Experience Design", "Leadership"],
+    year: "2019",
+    role: "Associate Design Director",
+    company: "frog",
+    timeline: "12 Weeks",
+    team: "frog / Progressive Insurance",
+    platform: "Mobile App",
+    thumbnail: "/thumbnails/financial-wellness.mp4",
+    poster: "/thumbnails/financial-wellness-poster.jpg",
+    caseStudy: {
+      overview:
+        "While at frog, I partnered with Progressive Insurance on an internal incubator exploring new product opportunities. One concept focused on financial wellness. It started broad, but quickly narrowed to something more specific and more urgent: helping people manage credit card debt. This wasn't just a financial problem. It was emotional. People felt overwhelmed, ashamed, and unsure where to start. We set out to design something that could meet them there and help them move forward.",
+      problem: {
+        heading: "Problem",
+        body: `How do you help people take control of credit card debt when the problem is as much emotional as it is financial?`,
+      },
+      context: {
+        heading: "Context",
+        body: `Many of the people we spoke to were carrying significant credit card debt — in some cases over $50K. They weren't irresponsible. They were often overwhelmed. They lacked clear mental models for how debt works, and over time it became something they avoided rather than managed. Through 20+ hours of interviews, a few patterns emerged: debt felt abstract and hard to track, shame prevented people from engaging with it directly, small actions felt insignificant so they were often skipped, and there was little understanding of how debt could be managed constructively. We weren't just designing a tool. We were trying to change behavior.`,
+      },
+      constraints: {
+        heading: "Solution",
+        body: `We designed a financial wellness concept centered on making debt visible, manageable, and emotionally approachable. At the core was a simple idea: your debt shouldn't feel invisible or overwhelming — it should feel understandable and something you can actively shape. We introduced a system combining real-time debt tracking through Plaid, clear visibility into balances, interest, and spending behavior, daily and weekly nudges to encourage small consistent actions, and educational content designed to build confidence over time. Debt was represented as a living character — "Bob" — whose size reflected the user's total debt. The goal wasn't to eliminate debt overnight. It was to make progress feel tangible and continuous.`,
+      },
+      process: {
+        heading: "Process",
+        body: `The work started with the psychology of debt, not the features of a product. That grounding shaped everything that followed.`,
+        subsections: [
+          {
+            heading: "Starting with People, Not Features",
+            body: `I led over 20 hours of user interviews focused on the psychology of debt. These were sensitive conversations that required empathy and trust. The goal was to understand not just behaviors, but motivations, fears, and avoidance patterns.`,
+          },
+          {
+            heading: "Finding Leverage Points for Behavior Change",
+            body: `We identified that large, abstract goals were ineffective. What worked better were small, repeatable actions that built momentum over time. This shaped the product direction toward nudges, visibility, and incremental progress.`,
+          },
+          {
+            heading: "Defining the Experience Strategy",
+            body: `As Associate Design Director, I led the team in shaping the overall product strategy and experience principles. We focused on reducing emotional friction, making information clear and actionable, and encouraging consistency over intensity.`,
+          },
+          {
+            heading: "Designing the System and Interaction Model",
+            body: `We built an MVP experience that included debt tracking across accounts, spending insights, reminder systems, and educational modules. Bob, the character representing debt, became central to the experience. His size and behavior reflected the user's financial state, making progress visible in a way that felt immediate.`,
+          },
+          {
+            heading: "Bringing the Experience to Life",
+            body: `I designed and animated Bob, creating multiple states that scaled with the user's debt. These were implemented using Lottie to ensure they worked seamlessly in product.`,
+          },
+        ],
+      },
+      outcome: {
+        heading: "Results",
+        body: `We shipped an MVP experience within a 12-week concept cycle, validated a product direction focused on behavioral change and financial wellness, and established a foundation for future features and iteration. The work demonstrated a differentiated approach to financial tools grounded in empathy. The product was released as a beta to explore market viability and was later shelved as part of broader prioritization decisions.`,
+      },
+      takeaways: {
+        heading: "Takeaways",
+        body: `Financial problems are often emotional problems first. Behavior change requires small, consistent actions, not big moments. Making abstract systems visible can shift how people engage with them. Tone and voice matter as much as functionality in sensitive domains. Not every product continues, but strong concepts can shape future thinking.`,
+      },
+    },
+  },
 ];
