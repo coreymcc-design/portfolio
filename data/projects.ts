@@ -43,7 +43,7 @@ export const projects: Project[] = [
     title: "Axiom Station Crew Interfaces",
     description:
       "Designing mission-critical interfaces for a next-generation space station, built for clarity in extreme conditions.",
-    tags: ["Systems Thinking", "Platform Design", "Design Systems", "Emerging Technology", "Accessibility", "Mission-Critical UX"],
+    tags: ["Platform Design", "Systems Thinking", "Design Systems", "Emerging Tech"],
     year: "2022 - 2023",
     role: "Associate Design Director",
     company: "Axiom Space",
@@ -115,7 +115,7 @@ export const projects: Project[] = [
     title: "T-Mobile Contextual App Home",
     description:
       "A personalized home experience that replaced generic upsells with relevant, context-driven actions.",
-    tags: ["Product Strategy", "Personalization", "Systems Thinking", "Platform Design", "Data-Informed Design", "Cross-functional Leadership"],
+    tags: ["Platform Design", "Personalization", "Research & Strategy", "Systems Thinking"],
     year: "2021",
     role: "Product Designer",
     company: "Stripe",
@@ -187,7 +187,7 @@ export const projects: Project[] = [
     title: "Hulu Account Migration & Unification",
     description:
       "A multi-year migration to unify Hulu's account and billing experience onto the Disney+ platform without losing subscribers.",
-    tags: ["Platform Design", "Systems Thinking", "Migration & Unification", "Payments", "0→1 & Scale", "Cross-functional Leadership"],
+    tags: ["Platform Design", "Systems Thinking", "Payments", "Leadership"],
     year: "2022",
     role: "Design Systems Lead",
     company: "Figma",
@@ -259,7 +259,7 @@ export const projects: Project[] = [
     title: "Starcruiser Wearable Concept",
     description:
       "A wearable concept designed to replace MagicBand with a fully in-universe Star Wars experience.",
-    tags: ["Experience Design", "Hardware + Software", "Concept Development", "Interaction Design", "Storytelling", "Emerging Technology"],
+    tags: ["0→1", "Emerging Tech", "Experience Design", "Storytelling"],
     year: "2022",
     role: "Design Lead",
     company: "WDI",
@@ -322,7 +322,7 @@ export const projects: Project[] = [
     title: "Global Payment Templates",
     description:
       "A framework for launching global payment methods faster, while keeping the experience consistent across regions.",
-    tags: ["Platform Design", "Systems Thinking", "0→1 & Scale", "Globalization", "Payments", "Cross-functional Leadership"],
+    tags: ["Platform Design", "Systems Thinking", "Payments", "Globalization"],
     year: "2024 - 2026",
     role: "Lead Product Designer",
     company: "Disney+",
@@ -394,7 +394,7 @@ export const projects: Project[] = [
     title: "Financial Wellness Concept",
     description:
       "A behavioral product concept designed to make credit card debt visible, approachable, and manageable.",
-    tags: ["0→1 Concept", "Behavioral Design", "Financial Wellness", "Research & Strategy", "Experience Design", "Leadership"],
+    tags: ["0→1", "Behavioral Design", "Research & Strategy", "Experience Design"],
     year: "2019",
     role: "Associate Design Director",
     company: "frog",

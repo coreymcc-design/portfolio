@@ -1,6 +1,6 @@
 "use client";
-import React, { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { projects } from "@/data/projects";
 import { ProjectLogo } from "@/components/ProjectLogos";
 import { useA11y } from "@/context/AccessibilityContext";
@@ -10,12 +10,25 @@ interface SelectedWorkProps {
 }
 
 // Aspect ratio from spec: 655.77 × 281.21 ≈ 2.332 : 1
-// Expressed as padding-top percentage: (281.21 / 655.77) * 100 ≈ 42.88%
 const VIDEO_ASPECT = "42.88%";
 
+// Derive unique tags sorted by frequency (descending), then alphabetically
+function getUniqueTags(): string[] {
+  const freq: Record<string, number> = {};
+  for (const p of projects) {
+    for (const t of p.tags) {
+      freq[t] = (freq[t] ?? 0) + 1;
+    }
+  }
+  return Object.entries(freq)
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .map(([tag]) => tag);
+}
+
+const ALL_TAGS = getUniqueTags();
+
 // iOS Safari won't autoplay unless `muted` is set as a DOM property (not just
-// the React attribute) before play is attempted. We also call .play()
-// imperatively to trigger autoplay immediately after the element mounts.
+// the React attribute) before play is attempted.
 function VideoThumbnail({ src, poster, alt }: { src: string; poster: string; alt: string }) {
   const ref = useRef<HTMLVideoElement>(null);
   useEffect(() => {
@@ -40,6 +53,52 @@ function VideoThumbnail({ src, poster, alt }: { src: string; poster: string; alt
   );
 }
 
+function FilterChips({
+  active,
+  onSelect,
+}: {
+  active: string;
+  onSelect: (tag: string) => void;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 14 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.55, ease: "easeOut", delay: 0.18 }}
+      className="flex flex-wrap gap-2 mb-12"
+      role="group"
+      aria-label="Filter projects by category"
+    >
+      {["All", ...ALL_TAGS].map((tag) => {
+        const isActive = tag === active;
+        return (
+          <button
+            key={tag}
+            onClick={() => onSelect(tag)}
+            aria-pressed={isActive}
+            className="px-3 py-1.5 text-[11px] font-mono font-medium rounded-md transition-colors duration-200 cursor-pointer"
+            style={
+              isActive
+                ? {
+                    background: "var(--color-text-primary)",
+                    color: "var(--color-bg)",
+                  }
+                : {
+                    background: "var(--color-warm-sand)",
+                    color: "var(--color-stone-gray)",
+                    boxShadow: "var(--shadow-ring)",
+                  }
+            }
+          >
+            {tag}
+          </button>
+        );
+      })}
+    </motion.div>
+  );
+}
+
 function ProjectCard({
   project,
   index,
@@ -52,10 +111,16 @@ function ProjectCard({
   const { reduceMotion } = useA11y();
   return (
     <motion.article
+      layout
       initial={{ opacity: 0, y: 22 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.65, ease: "easeOut", delay: index * 0.11 }}
+      exit={{ opacity: 0, transition: { duration: 0.18, ease: "easeIn" } }}
+      transition={{
+        layout: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
+        opacity: { duration: 0.65, ease: "easeOut", delay: index * 0.09 },
+        y: { duration: 0.65, ease: "easeOut", delay: index * 0.09 },
+      }}
       className="group cursor-pointer border-t border-near-black/8 pt-8 pb-10"
       onClick={onOpen}
       onKeyDown={(e) => e.key === "Enter" && onOpen()}
@@ -63,18 +128,11 @@ function ProjectCard({
       role="button"
       aria-label={`Open case study: ${project.title}`}
     >
-      {/* ── Video thumbnail — fixed aspect ratio, full width, overflow clipped ── */}
+      {/* ── Video thumbnail ── */}
       <div className="relative w-full overflow-hidden rounded-xl bg-warm-sand shadow-ring mb-0">
-        {/* Intrinsic aspect ratio box: 281.21 / 655.77 = 42.88% */}
         <div style={{ paddingTop: VIDEO_ASPECT }} className="relative">
-          {/*
-            If a real video+poster pair is configured we render a looping,
-            muted, inline video. Otherwise we fall back to a neutral play
-            glyph — useful while case-study assets are still being produced.
-          */}
           {project.thumbnail?.endsWith(".mp4") && project.poster ? (
             reduceMotion ? (
-              /* Reduce-motion: render the static poster instead of the looping video. */
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 className="absolute inset-0 w-full h-full object-cover"
@@ -119,16 +177,12 @@ function ProjectCard({
         </div>
       </div>
 
-      {/* ── Content row — inset from video edges ── */}
+      {/* ── Content row ── */}
       <div className="px-1 pt-5">
         <div className="flex flex-col sm:flex-row sm:items-start gap-6 sm:gap-10">
 
           {/* Left: name + logo + tags */}
           <div className="sm:w-52 flex-shrink-0">
-            {/* Brand logo + project name. Logos use currentColor so they
-                pick up their per-brand Tailwind text utility and flip to
-                ivory in dark mode. Fixed height, intrinsic widths tuned
-                in ProjectLogos.tsx for visual consistency. */}
             <div className="flex h-fit items-center gap-3 mb-3">
               <ProjectLogo slug={project.slug} />
             </div>
@@ -140,13 +194,16 @@ function ProjectCard({
               {project.title}
             </h3>
 
-            {/* Tags */}
             <div className="flex flex-wrap gap-1.5">
               {project.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-2.5 py-0.5 text-[11px] font-mono text-stone-gray
-                             bg-warm-sand rounded-md shadow-ring"
+                  className="px-2.5 py-0.5 text-[11px] font-mono rounded-md"
+                  style={{
+                    background: "var(--color-warm-sand)",
+                    color: "var(--color-stone-gray)",
+                    boxShadow: "var(--shadow-ring)",
+                  }}
                 >
                   {tag}
                 </span>
@@ -156,12 +213,15 @@ function ProjectCard({
 
           {/* Right: description + open link */}
           <div className="flex-1 flex flex-col justify-between gap-5">
-            <p className="text-[14px] font-sans text-olive-gray leading-relaxed">
+            <p className="text-[14px] font-sans leading-relaxed" style={{ color: "var(--color-olive-gray)" }}>
               {project.description}
             </p>
 
-            <div className="flex items-center gap-2 text-[13px] font-sans font-medium text-near-black
-                            group-hover:text-terracotta transition-colors duration-150 w-fit">
+            <div
+              className="flex items-center gap-2 text-[13px] font-sans font-medium
+                          group-hover:text-terracotta transition-colors duration-150 w-fit"
+              style={{ color: "var(--color-near-black)" }}
+            >
               Open case study
               <svg
                 width="12"
@@ -188,11 +248,18 @@ function ProjectCard({
 }
 
 export function SelectedWork({ onOpenProject }: SelectedWorkProps) {
+  const [activeFilter, setActiveFilter] = useState("All");
+
+  const filtered =
+    activeFilter === "All"
+      ? projects
+      : projects.filter((p) => p.tags.includes(activeFilter));
+
   return (
     <section id="work" className="w-full py-24 md:py-32 bg-bg border-b border-near-black/10">
       <div className="container-wide">
-        {/* Section header — capped width to match project cards */}
         <div className="max-w-[860px] mx-auto">
+          {/* Section header */}
           <motion.div
             initial={{ opacity: 0, y: 22 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -210,14 +277,17 @@ export function SelectedWork({ onOpenProject }: SelectedWorkProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.65, ease: "easeOut", delay: 0.11 }}
-            className="body-large mt-4 mb-14"
+            className="body-large mt-4 mb-8"
           >
-          Some of this work is under NDA. If you don’t have the password, reach out at corey.p.mcclelland@gmail.com!
+            Some of this work is under NDA. If you don&apos;t have the password, reach out at corey.p.mcclelland@gmail.com!
           </motion.p>
 
-          {/* Project list — single column, full width within max-w container */}
-          <div>
-            {projects.map((project, i) => (
+          {/* Filter chips */}
+          <FilterChips active={activeFilter} onSelect={setActiveFilter} />
+
+          {/* Project list */}
+          <AnimatePresence mode="popLayout">
+            {filtered.map((project, i) => (
               <ProjectCard
                 key={project.slug}
                 project={project}
@@ -225,7 +295,7 @@ export function SelectedWork({ onOpenProject }: SelectedWorkProps) {
                 onOpen={() => onOpenProject(project.slug)}
               />
             ))}
-          </div>
+          </AnimatePresence>
         </div>
       </div>
     </section>
