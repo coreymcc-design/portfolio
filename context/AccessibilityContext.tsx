@@ -7,7 +7,7 @@ import { MotionConfig } from "framer-motion";
 export type Theme = "light" | "dark";
 
 /** Visual identity — an accent + type pairing, explored via the switcher. */
-export type Identity = "terracotta" | "editorial" | "ink" | "mono";
+export type Identity = "terracotta" | "bolt" | "ink" | "mono";
 
 export const IDENTITIES: {
   id: Identity;
@@ -17,12 +17,12 @@ export const IDENTITIES: {
   serif: string;
 }[] = [
   { id: "terracotta", name: "Terracotta", tag: "Warm · Editorial",  swatch: "#ce6355", serif: "'Cormorant', Georgia, serif" },
-  { id: "editorial",  name: "Editorial",  tag: "Refined · Serif",   swatch: "#2f5d50", serif: "'Playfair Display', Georgia, serif" },
+  { id: "bolt",       name: "Bolt",       tag: "Bold · Athletic",   swatch: "#e8112d", serif: "'Anton', sans-serif" },
   { id: "ink",        name: "Ink",        tag: "Cool · Technical",  swatch: "#2b57c7", serif: "'Space Grotesk', sans-serif" },
   { id: "mono",       name: "Mono",       tag: "Minimal · Neutral", swatch: "#374151", serif: "'Inter Tight', sans-serif" },
 ];
 
-const IDENTITY_IDS: Identity[] = ["terracotta", "editorial", "ink", "mono"];
+const IDENTITY_IDS: Identity[] = ["terracotta", "bolt", "ink", "mono"];
 
 interface A11yState {
   theme: Theme;

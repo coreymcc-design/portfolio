@@ -359,34 +359,42 @@ html.dark .shadow-card      { box-shadow: var(--shadow-card) !important; }
   box-shadow: 0px 0px 0px 2px var(--color-accent);
 }
 
-/* ── Identity: Editorial — warm, refined, forest-green serif ── */
+/* ── Identity: Bolt — bold, athletic, vibrant red block type ── */
 /* Accent + type apply in both light and dark. */
-html.theme-editorial {
-  --color-accent:       #2f5d50;
-  --color-accent-hover: #264b41;
-  --color-accent-soft:  #6f9c8f;
+html.theme-bolt {
+  --color-accent:       #e8112d;
+  --color-accent-hover: #c60d24;
+  --color-accent-soft:  #ff5a5a;
 
-  --font-serif: 'Playfair Display', Georgia, serif;
+  /* Anton in the display slot for tall, heavy Nike-style block type. */
+  --font-serif: 'Anton', 'Arial Narrow', sans-serif;
   --font-sans:  'Inter', Arial, sans-serif;
-  --font-mono:  'IBM Plex Mono', ui-monospace, monospace;
+  --font-mono:  'JetBrains Mono', ui-monospace, monospace;
 }
 /* Surfaces only in light mode — dark mode uses the shared dark palette. */
-html.theme-editorial:not(.dark) {
-  --color-bg:           #f3f0e9;
-  --color-ivory:        #faf8f2;
-  --color-white:        #fffdf8;
-  --color-warm-sand:    #e7e2d6;
+html.theme-bolt:not(.dark) {
+  --color-bg:           #f4f4f5;
+  --color-ivory:        #fafafa;
+  --color-white:        #ffffff;
+  --color-warm-sand:    #ececee;
 
-  --color-text-primary:  #1f2420;
-  --color-charcoal-warm: #3f4642;
-  --color-olive-gray:    #5a615b;
-  --color-stone-gray:    #8a8f88;
-  --color-dark-warm:     #3f4642;
+  --color-text-primary:  #0a0a0a;
+  --color-charcoal-warm: #1c1c1e;
+  --color-olive-gray:    #48484a;
+  --color-stone-gray:    #6e6e73;
+  --color-dark-warm:     #1c1c1e;
 
-  --color-border-cream: #ece7dc;
-  --color-border-warm:  #e0dacd;
-  --color-ring-warm:    #cfc9bb;
-  --color-ring-deep:    #beb8a9;
+  --color-border-cream: #ededef;
+  --color-border-warm:  #e0e0e2;
+  --color-ring-warm:    #d1d1d4;
+  --color-ring-deep:    #bcbcbf;
+}
+/* Amplify the block-type feel: display headings go uppercase + tight. */
+html.theme-bolt .font-serif {
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 0.95;
+  font-weight: 400; /* Anton is a single heavy weight */
 }
 
 /* ── Identity: Ink — cool, technical, cobalt grotesk ── */
