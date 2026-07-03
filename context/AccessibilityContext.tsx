@@ -6,11 +6,30 @@ import { MotionConfig } from "framer-motion";
 
 export type Theme = "light" | "dark";
 
+/** Visual identity — an accent + type pairing, explored via the switcher. */
+export type Identity = "terracotta" | "editorial" | "ink" | "mono";
+
+export const IDENTITIES: {
+  id: Identity;
+  name: string;
+  tag: string;
+  swatch: string;
+  serif: string;
+}[] = [
+  { id: "terracotta", name: "Terracotta", tag: "Warm · Editorial",  swatch: "#ce6355", serif: "'Cormorant', Georgia, serif" },
+  { id: "editorial",  name: "Editorial",  tag: "Refined · Serif",   swatch: "#2f5d50", serif: "'Playfair Display', Georgia, serif" },
+  { id: "ink",        name: "Ink",        tag: "Cool · Technical",  swatch: "#2b57c7", serif: "'Space Grotesk', sans-serif" },
+  { id: "mono",       name: "Mono",       tag: "Minimal · Neutral", swatch: "#374151", serif: "'Inter Tight', sans-serif" },
+];
+
+const IDENTITY_IDS: Identity[] = ["terracotta", "editorial", "ink", "mono"];
+
 interface A11yState {
   theme: Theme;
   lineSpacing: number;   // 1–2; 1 = default line heights
   highContrast: boolean;
   reduceMotion: boolean;
+  identity: Identity;
 }
 
 interface A11yContextValue extends A11yState {
@@ -18,6 +37,7 @@ interface A11yContextValue extends A11yState {
   setLineSpacing: (n: number) => void;
   setHighContrast: (v: boolean) => void;
   setReduceMotion: (v: boolean) => void;
+  setIdentity: (i: Identity) => void;
   panelOpen: boolean;
   togglePanel: () => void;
 }
@@ -56,6 +76,7 @@ export function A11yProvider({ children }: { children: React.ReactNode }) {
   const [lineSpacing, _setLineSpacing]   = useState(1);
   const [highContrast, _setHighContrast] = useState(false);
   const [reduceMotion, _setReduceMotion] = useState(false);
+  const [identity, _setIdentity]         = useState<Identity>("terracotta");
   const [panelOpen, setPanelOpen]        = useState(false);
   const [hydrated, setHydrated]          = useState(false);
 
@@ -66,6 +87,7 @@ export function A11yProvider({ children }: { children: React.ReactNode }) {
     _setLineSpacing(stored.lineSpacing ?? 1);
     _setHighContrast(stored.highContrast ?? false);
     _setReduceMotion(stored.reduceMotion ?? false);
+    _setIdentity(stored.identity ?? "terracotta");
     setHydrated(true);
   }, []);
 
@@ -96,6 +118,15 @@ export function A11yProvider({ children }: { children: React.ReactNode }) {
     if (!hydrated) return;
     document.documentElement.classList.toggle("reduce-motion", reduceMotion);
   }, [reduceMotion, hydrated]);
+
+  // Apply identity class — remove all identity classes, then add the active one
+  // (terracotta is the default and needs no class).
+  useEffect(() => {
+    if (!hydrated) return;
+    const el = document.documentElement;
+    IDENTITY_IDS.forEach((id) => el.classList.remove(`theme-${id}`));
+    if (identity !== "terracotta") el.classList.add(`theme-${identity}`);
+  }, [identity, hydrated]);
 
   // Apply line spacing via injected <style> — avoids touching every component
   useEffect(() => {
@@ -130,12 +161,16 @@ export function A11yProvider({ children }: { children: React.ReactNode }) {
     _setReduceMotion(v); save({ reduceMotion: v });
   }, []);
 
+  const setIdentity = useCallback((i: Identity) => {
+    _setIdentity(i); save({ identity: i });
+  }, []);
+
   const togglePanel = useCallback(() => setPanelOpen((p) => !p), []);
 
   return (
     <A11yContext.Provider value={{
-      theme, lineSpacing, highContrast, reduceMotion,
-      setTheme, setLineSpacing, setHighContrast, setReduceMotion,
+      theme, lineSpacing, highContrast, reduceMotion, identity,
+      setTheme, setLineSpacing, setHighContrast, setReduceMotion, setIdentity,
       panelOpen, togglePanel,
     }}>
       {/*

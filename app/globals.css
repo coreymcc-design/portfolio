@@ -8,6 +8,11 @@
   --color-terracotta:    #ce6355;
   --color-coral:         #eb9084;
 
+  /* Accent — the single lever each identity swaps. Defaults to terracotta. */
+  --color-accent:        #ce6355;
+  --color-accent-hover:  #b8574a;
+  --color-accent-soft:   #eb9084;
+
   /* Light Surfaces */
   --color-bg:            #f5f4ed;
   --color-ivory:         #faf9f5;
@@ -321,6 +326,124 @@ html.dark .border-near-black\/8  { border-color: rgba(240,237,228,0.08) !importa
 html.dark .shadow-ring      { box-shadow: var(--shadow-ring) !important; }
 html.dark .shadow-ring-warm { box-shadow: var(--shadow-ring-sm) !important; }
 html.dark .shadow-card      { box-shadow: var(--shadow-card) !important; }
+
+/* ─── Identity system ─────────────────────────────────────────
+   Each "identity" is a combination of an accent color and a type
+   pairing. Rather than editing every component, we remap the brand
+   utilities (terracotta/coral) and the font utilities to CSS vars,
+   then each identity class on <html> only has to swap those vars.
+   This mirrors the dark-mode override strategy already in use.
+*/
+
+/* Accent — brand utilities resolve to the current accent var */
+.text-terracotta                                { color: var(--color-accent) !important; }
+.bg-terracotta                                  { background-color: var(--color-accent) !important; }
+.border-terracotta                              { border-color: var(--color-accent) !important; }
+.hover\:text-terracotta:hover                   { color: var(--color-accent) !important; }
+.group:hover .group-hover\:text-terracotta      { color: var(--color-accent) !important; }
+.text-coral                                     { color: var(--color-accent-soft) !important; }
+.bg-coral                                       { background-color: var(--color-accent-soft) !important; }
+
+/* Font utilities resolve to the current type pairing */
+.font-serif { font-family: var(--font-serif) !important; }
+.font-sans  { font-family: var(--font-sans) !important; }
+.font-mono  { font-family: var(--font-mono) !important; }
+
+/* Accent button — replaces the previously hardcoded terracotta hover/shadow */
+.btn-accent {
+  background-color: var(--color-accent);
+  box-shadow: 0px 0px 0px 1px var(--color-accent);
+}
+.btn-accent:hover {
+  background-color: var(--color-accent-hover);
+  box-shadow: 0px 0px 0px 2px var(--color-accent);
+}
+
+/* ── Identity: Editorial — warm, refined, forest-green serif ── */
+/* Accent + type apply in both light and dark. */
+html.theme-editorial {
+  --color-accent:       #2f5d50;
+  --color-accent-hover: #264b41;
+  --color-accent-soft:  #6f9c8f;
+
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans:  'Inter', Arial, sans-serif;
+  --font-mono:  'IBM Plex Mono', ui-monospace, monospace;
+}
+/* Surfaces only in light mode — dark mode uses the shared dark palette. */
+html.theme-editorial:not(.dark) {
+  --color-bg:           #f3f0e9;
+  --color-ivory:        #faf8f2;
+  --color-white:        #fffdf8;
+  --color-warm-sand:    #e7e2d6;
+
+  --color-text-primary:  #1f2420;
+  --color-charcoal-warm: #3f4642;
+  --color-olive-gray:    #5a615b;
+  --color-stone-gray:    #8a8f88;
+  --color-dark-warm:     #3f4642;
+
+  --color-border-cream: #ece7dc;
+  --color-border-warm:  #e0dacd;
+  --color-ring-warm:    #cfc9bb;
+  --color-ring-deep:    #beb8a9;
+}
+
+/* ── Identity: Ink — cool, technical, cobalt grotesk ── */
+html.theme-ink {
+  --color-accent:       #2b57c7;
+  --color-accent-hover: #1f45a8;
+  --color-accent-soft:  #7d9be0;
+
+  --font-serif: 'Space Grotesk', 'Inter', sans-serif;
+  --font-sans:  'Inter', Arial, sans-serif;
+  --font-mono:  'JetBrains Mono', ui-monospace, monospace;
+}
+html.theme-ink:not(.dark) {
+  --color-bg:           #eef1f5;
+  --color-ivory:        #f7f9fc;
+  --color-white:        #ffffff;
+  --color-warm-sand:    #e2e7ee;
+
+  --color-text-primary:  #10151c;
+  --color-charcoal-warm: #303841;
+  --color-olive-gray:    #4a545f;
+  --color-stone-gray:    #7b8794;
+  --color-dark-warm:     #303841;
+
+  --color-border-cream: #e6eaf0;
+  --color-border-warm:  #dbe1ea;
+  --color-ring-warm:    #c6ceda;
+  --color-ring-deep:    #b3bdcb;
+}
+
+/* ── Identity: Mono — neutral, minimal, restrained slate ── */
+html.theme-mono {
+  --color-accent:       #374151;
+  --color-accent-hover: #1f2937;
+  --color-accent-soft:  #94a3b8;
+
+  --font-serif: 'Inter Tight', 'Inter', sans-serif;
+  --font-sans:  'Inter', Arial, sans-serif;
+  --font-mono:  'JetBrains Mono', ui-monospace, monospace;
+}
+html.theme-mono:not(.dark) {
+  --color-bg:           #f4f4f4;
+  --color-ivory:        #fafafa;
+  --color-white:        #ffffff;
+  --color-warm-sand:    #ebebeb;
+
+  --color-text-primary:  #0a0a0a;
+  --color-charcoal-warm: #262626;
+  --color-olive-gray:    #525252;
+  --color-stone-gray:    #737373;
+  --color-dark-warm:     #262626;
+
+  --color-border-cream: #ededed;
+  --color-border-warm:  #e0e0e0;
+  --color-ring-warm:    #d4d4d4;
+  --color-ring-deep:    #c2c2c2;
+}
 
 /* ─── Accessibility slider styling ───────────────────────────── */
 .a11y-slider {

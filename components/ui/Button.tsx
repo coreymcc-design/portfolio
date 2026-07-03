@@ -12,7 +12,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantStyles: Record<ButtonVariant, string> = {
   terracotta:
-    "bg-terracotta text-ivory hover:bg-[#b8574a] shadow-[0px_0px_0px_1px_#ce6355] hover:shadow-[0px_0px_0px_2px_#ce6355]",
+    "btn-accent text-ivory",
   dark:
     "bg-near-black text-[#faf9f5] border border-dark-surface hover:bg-dark-surface shadow-[0px_0px_0px_1px_#30302e]",
   sand:

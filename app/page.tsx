@@ -19,6 +19,7 @@ import { SelectedWork } from "@/components/SelectedWork";
 import { About } from "@/components/About";
 import { WorkHistory } from "@/components/WorkHistory";
 import { CaseStudyModal } from "@/components/CaseStudyModal";
+import { IdentitySwitcher } from "@/components/IdentitySwitcher";
 import { useActiveSection } from "@/hooks/useActiveSection";
 
 const SECTION_IDS = ["hero", "work", "about", "experience"];
@@ -156,6 +157,9 @@ export default function Home() {
         prefillPassword={prefillPassword}
         onClose={closeProject}
       />
+
+      {/* Live identity switcher — explore accent + type directions */}
+      <IdentitySwitcher />
     </>
   );
 }
