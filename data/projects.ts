@@ -19,6 +19,9 @@ export interface Project {
   timeline: string;
   team: string;
   platform: string;
+  // Per-project accent — each case study carries its own saturated color
+  // so sections feel distinct against the neutral background.
+  accent: string;
   // thumbnail: path to video or image (swap in your real assets)
   thumbnail: string;
   // Optional poster image shown before the video loads / plays, and used
@@ -41,6 +44,7 @@ export const projects: Project[] = [
   {
     slug: "axiom-interfaces",
     title: "Axiom Station Crew Interfaces",
+    accent: "#2b6bff",
     description:
       "Designing mission-critical interfaces for a next-generation space station, built for clarity in extreme conditions.",
     tags: ["Systems Thinking", "Design Systems", "Emerging Tech"],
@@ -113,6 +117,7 @@ export const projects: Project[] = [
   {
     slug: "tmobile-app",
     title: "T-Mobile Contextual App Home",
+    accent: "#e20074",
     description:
       "A personalized home experience that replaced generic upsells with relevant, context-driven actions.",
     tags: ["Personalization", "Research & Strategy", "Systems Thinking"],
@@ -185,6 +190,7 @@ export const projects: Project[] = [
   {
     slug: "hulu-account",
     title: "Hulu Account Migration & Unification",
+    accent: "#12b76a",
     description:
       "A multi-year migration to unify Hulu's account and billing experience onto the Disney+ platform without losing subscribers.",
     tags: ["Systems Thinking", "Payments"],
@@ -257,6 +263,7 @@ export const projects: Project[] = [
   {
     slug: "gs-wearable",
     title: "Starcruiser Wearable Concept",
+    accent: "#f5a623",
     description:
       "A wearable concept designed to replace MagicBand with a fully in-universe Star Wars experience.",
     tags: ["Emerging Tech"],
@@ -320,6 +327,7 @@ export const projects: Project[] = [
   {
     slug: "global-payments",
     title: "Global Payment Templates",
+    accent: "#ff4d2e",
     description:
       "A framework for launching global payment methods faster, while keeping the experience consistent across regions.",
     tags: ["Systems Thinking", "Payments", "Globalization"],
@@ -392,6 +400,7 @@ export const projects: Project[] = [
   {
     slug: "financial-wellness",
     title: "Financial Wellness Concept",
+    accent: "#0fb5a8",
     description:
       "A behavioral product concept designed to make credit card debt visible, approachable, and manageable.",
     tags: ["Behavioral Design", "Research & Strategy"],
